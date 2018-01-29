@@ -1,10 +1,15 @@
 {
   "name": "raw-html-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Render react components from raw html",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": ["css", "es", "lib", "umd"],
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
   "scripts": {
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
@@ -35,7 +40,9 @@
   "homepage": "https://github.com/getchalk/raw-html-react",
   "repository": "https://github.com/getchalk/raw-html-react",
   "license": "MIT",
-  "keywords": ["react-component"],
+  "keywords": [
+    "react-component"
+  ],
   "jest": {
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
