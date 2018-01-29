@@ -4,19 +4,14 @@
   "description": "Render react components from raw html",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "files": ["css", "es", "lib", "umd"],
   "scripts": {
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --server"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
@@ -37,11 +32,10 @@
     "react-test-renderer": "^16.2.0"
   },
   "author": "",
-  "homepage": "http://github.com/getchalk/htmlreact",
+  "homepage": "https://github.com/getchalk/raw-html-react",
+  "repository": "https://github.com/getchalk/raw-html-react",
   "license": "MIT",
-  "keywords": [
-    "react-component"
-  ],
+  "keywords": ["react-component"],
   "jest": {
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
