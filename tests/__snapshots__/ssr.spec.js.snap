@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Server-side rendering Handles comment 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering Handles comments inside tags 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<ul><!-- <li>test</li> --></ul>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering leaves non-react componetns in place 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<div><span style=\\"color:blue\\">hello</span><p>test</p></div>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering parse react component from string 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<span style=\\"color:red\\">hello</span>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering parse react component from string with props 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<span style=\\"color:blue\\">hello</span>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering parses html with siblings 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<ul class=\\"list\\"><li>Text1</li><li>Text2</li></ul><div>Sibling</div>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering parses top level siblings without wrapper 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<li>item-1</li><li>item-2</li><li>item-3</li><li>item-4</li><li>item-5</li>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering passes through class, width, height, src 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<span style=\\"color:red\\">hello</span>",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering renders text nodes 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "i am pure text",
+    }
+  }
+/>
+`;
+
+exports[`Server-side rendering supports style 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<div style=\\"background-color: #fff;\\"></div>",
+    }
+  }
+/>
+`;

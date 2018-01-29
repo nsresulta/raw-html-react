@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`client side rendering Handles comment 1`] = `<!-- comment -->`;
+
+exports[`client side rendering Handles comments inside tags 1`] = `
+<ul>
+  <!-- &lt;li&gt;test&lt;/li&gt; -->
+</ul>
+`;
+
+exports[`client side rendering leaves non-react componetns in place 1`] = `
+<div>
+  <span
+    style="color: blue;"
+  >
+    hello
+  </span>
+  <p>
+    test
+  </p>
+</div>
+`;
+
+exports[`client side rendering parse react component from string 1`] = `
+<span
+  style="color: red;"
+>
+  hello
+</span>
+`;
+
+exports[`client side rendering parse react component from string with props 1`] = `
+<span
+  style="color: blue;"
+>
+  hello
+</span>
+`;
+
+exports[`client side rendering parses html with siblings 1`] = `
+<ul
+  class="list"
+>
+  <li>
+    Text1
+  </li>
+  <li>
+    Text2
+  </li>
+</ul>
+`;
+
+exports[`client side rendering parses top level siblings without wrapper 1`] = `
+<li>
+  item-1
+</li>
+`;
+
+exports[`client side rendering passes through class, width, height, src 1`] = `
+<span
+  style="color: red;"
+>
+  hello
+</span>
+`;
+
+exports[`client side rendering renders text nodes 1`] = `i am pure text`;
+
+exports[`client side rendering supports style 1`] = `
+<div
+  style="background-color: #fff;"
+/>
+`;

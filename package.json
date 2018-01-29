@@ -1,0 +1,50 @@
+{
+  "name": "raw-html-react",
+  "version": "0.0.1",
+  "description": "Render react components from raw html",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build-react-component",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "start": "nwb serve-react-demo",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --server"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.1.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "jest": "^22.1.4",
+    "nwb": "0.21.x",
+    "react-test-renderer": "^16.2.0"
+  },
+  "author": "",
+  "homepage": "http://github.com/getchalk/htmlreact",
+  "license": "MIT",
+  "keywords": [
+    "react-component"
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "<rootDir>/jest.transform.js"
+    }
+  }
+}
