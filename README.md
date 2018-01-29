@@ -13,20 +13,20 @@ This is useful for rending React components from a headless CMS in client side r
 ## Install
 
 ```sh
-yarn add html-react-converter
+yarn add raw-html-react
 ```
 
 or
 
 ```sh
-npm install html-react-converter
+npm install raw-html-react
 ```
 
 ## Example
 
 ```js
 import React from 'react';
-import ReactHtml from 'html-react-converter';
+import ReactHtml from 'raw-html-react';
 import MyComponent from '../components/MyComponent';
 
 class Example extends React.Component {
