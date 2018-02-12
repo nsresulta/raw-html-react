@@ -36,11 +36,9 @@ export default class ReactHtml extends React.Component<> {
 
     // iterate over all elements that match our componentAttribute
     // ie `<div data-react-component>`
-    const nodeList = this.renderTarget.querySelectorAll(
-      `[${componentAttribute}]`
-    );
-
-    [...nodeList].forEach(node => {
+    Array.from(
+      this.renderTarget.querySelectorAll(`[${componentAttribute}]`)
+    ).forEach(node => {
       const component = componentMap[node.getAttribute(componentAttribute)];
       const props = this.parseStringProps(node.getAttribute(propsAttribute));
       const element = React.createElement(component, props);
