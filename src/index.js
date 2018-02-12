@@ -45,16 +45,18 @@ export default class ReactHtml extends React.Component<> {
 
       // render the newly created element into the subtree using an
       // unstable ReactDOM api in order to maintain the tree context
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, element, node, () =>
+      ReactDOM.unstable_renderSubtreeIntoContainer(this, element, node, () => {
         // after the React element is rendered, replace the placeholder element
         // with it's child to clean up the DOM
-        node.replaceWith(...node.childNodes)
-      );
+        if (node.replaceWith) {
+          node.replaceWith(...node.childNodes);
+        }
+      });
     });
 
     // if updates are dissallowed we can clean up the dom further by
     // replacing the target element with it's children
-    if (!allowUpdates) {
+    if (!allowUpdates && this.renderTarget.replaceWith) {
       // remove the outer container
       this.renderTarget.replaceWith(...this.renderTarget.childNodes);
     }
