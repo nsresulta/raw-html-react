@@ -36,21 +36,23 @@ export default class ReactHtml extends React.Component<> {
 
     // iterate over all elements that match our componentAttribute
     // ie `<div data-react-component>`
-    this.renderTarget
-      .querySelectorAll(`[${componentAttribute}]`)
-      .forEach(node => {
-        const component = componentMap[node.getAttribute(componentAttribute)];
-        const props = this.parseStringProps(node.getAttribute(propsAttribute));
-        const element = React.createElement(component, props);
+    const nodeList = this.renderTarget.querySelectorAll(
+      `[${componentAttribute}]`
+    );
 
-        // render the newly created element into the subtree using an
-        // unstable ReactDOM api in order to maintain the tree context
-        ReactDOM.unstable_renderSubtreeIntoContainer(this, element, node, () =>
-          // after the React element is rendered, replace the placeholder element
-          // with it's child to clean up the DOM
-          node.replaceWith(...node.childNodes)
-        );
-      });
+    [...nodeList].forEach(node => {
+      const component = componentMap[node.getAttribute(componentAttribute)];
+      const props = this.parseStringProps(node.getAttribute(propsAttribute));
+      const element = React.createElement(component, props);
+
+      // render the newly created element into the subtree using an
+      // unstable ReactDOM api in order to maintain the tree context
+      ReactDOM.unstable_renderSubtreeIntoContainer(this, element, node, () =>
+        // after the React element is rendered, replace the placeholder element
+        // with it's child to clean up the DOM
+        node.replaceWith(...node.childNodes)
+      );
+    });
 
     // if updates are dissallowed we can clean up the dom further by
     // replacing the target element with it's children
