@@ -31,7 +31,13 @@ export default class ReactHtml extends React.Component<{
     } = this.props;
 
     // render the html passed in props to the target element
-    this.renderTarget.innerHTML = html;
+    if (document.createRange) {
+      const range = document.createRange();
+      range.setStart(this.renderTarget, 0);
+      this.renderTarget.appendChild(range.createContextualFragment(html));
+    } else {
+      this.renderTarget.innerHTML = html;
+    }
 
     // iterate over all elements that match our componentAttribute
     // ie `<div data-react-component>`
