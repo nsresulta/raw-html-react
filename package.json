@@ -1,6 +1,6 @@
 {
   "name": "raw-html-react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Render react components from raw html",
   "main": "lib/index.js",
   "module": "es/index.js",
