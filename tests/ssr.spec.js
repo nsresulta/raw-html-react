@@ -12,7 +12,13 @@ describe('Server-side rendering', async () => {
   for (const testName in fixtures) {
     it(testName, () => {
       const html = fixtures[testName];
-      const element = <ReactHtml componentMap={{ FakeElement }} html={html} />;
+      const element = (
+        <ReactHtml
+          componentMap={{ FakeElement }}
+          html={html}
+          onServerRender={$ => $('script').remove()}
+        />
+      );
       expect(ReactTestRenderer.create(element).toJSON()).toMatchSnapshot();
     });
   }

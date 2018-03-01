@@ -53,17 +53,20 @@ type ReactHtmlProps = {
   propsAttribute?: String,
   contextWrapper?: React.Node,
   allowUpdates?: Boolean
+  onServerRender?: Function
 };
 ```
 
-| Prop Name          | Type      | Required   | Default Value        | Description                                                                                                                                        |
-| ------------------ | --------- | ---------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| html               | `String`  | `required` |                      | HTML to be parsed and rendered with React components inline.                                                                                       |
-| componentMap       | `Object`  | `required` |                      | An object where the key is the value to be used in `data-react-component` attributes and the value is the reference to the actual react component. |
-| componentAttribute | `Object`  | optional   | data-react-component | The react component to be rendered in place of the html element                                                                                    |
-| propsAttribute     | `Object`  | optional   | data-react-props     | The props that will be passed to the react component. (JSON string)                                                                                |
-| contextWrapper     | `Object`  | optional   | null                 | Wrapper component to be used when statically rendering for SSR. Typically a context provider.                                                      |
-| allowUpdates       | `Boolean` | optional   | false                | Allow the component to re-render in response to updating the html prop                                                                             |
+| Prop Name          | Type       | Required   | Default Value        | Description                                                                                                                                        |
+| ------------------ | ---------- | ---------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| html               | `String`   | `required` |                      | HTML to be parsed and rendered with React components inline.                                                                                       |
+| componentMap       | `Object`   | `required` |                      | An object where the key is the value to be used in `data-react-component` attributes and the value is the reference to the actual react component. |
+| componentAttribute | `Object`   | optional   | data-react-component | The react component to be rendered in place of the html element                                                                                    |
+| propsAttribute     | `Object`   | optional   | data-react-props     | The props that will be passed to the react component. (JSON string)                                                                                |
+| contextWrapper     | `Object`   | optional   | null                 | Wrapper component to be used when statically rendering for SSR. Typically a context provider.                                                      |
+| allowUpdates       | `Boolean`  | optional   | false                | Allow the component to re-render in response to updating the html prop                                                                             |
+| onServerRender     | `Function` | optional   | null                 | A hook for modifying the server rendered html. A callback function that receives the cheerio root object ($)                                       |
+|                    |
 
 ### HTML Attributes
 

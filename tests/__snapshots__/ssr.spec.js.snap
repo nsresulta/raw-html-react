@@ -20,6 +20,16 @@ exports[`Server-side rendering Handles comments inside tags 1`] = `
 />
 `;
 
+exports[`Server-side rendering handles script tags 1`] = `
+<div
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "hello ",
+    }
+  }
+/>
+`;
+
 exports[`Server-side rendering leaves non-react componetns in place 1`] = `
 <div
   dangerouslySetInnerHTML={

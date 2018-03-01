@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-type ReactHtmlProps = {
+export default class ReactHtml extends React.Component<{
   html: String,
   componentMap: Object,
   componentAttribute?: String,
   propsAttribute?: String,
   contextWrapper?: React.Node,
-  allowUpdates?: Boolean
-};
-
-export default class ReactHtml extends React.Component<> {
+  allowUpdates?: Boolean,
+  onServerRender?: Function
+}> {
   static defaultProps = {
     componentAttribute: 'data-react-component',
     propsAttribute: 'data-react-props',
@@ -113,7 +112,8 @@ export default class ReactHtml extends React.Component<> {
       propsAttribute,
       componentProps,
       componentMap,
-      contextWrapper
+      contextWrapper,
+      onServerRender
     } = this.props;
 
     // parse the raw html with cheerio
@@ -137,6 +137,10 @@ export default class ReactHtml extends React.Component<> {
       // replace the placeholder element with the rendered html
       $(element).replaceWith(reactHtml);
     });
+
+    if (onServerRender) {
+      onServerRender($);
+    }
 
     return $('body').html();
   };

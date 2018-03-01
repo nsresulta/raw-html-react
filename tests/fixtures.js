@@ -10,5 +10,6 @@ export default {
     '<ul class="list"><li>Text1</li><li>Text2</li></ul><div>Sibling</div>',
   'supports style': '<div style="background-color: #fff;"></div>',
   'renders text nodes': 'i am pure text',
+  'handles script tags': `hello <script src="https://example.com/script.js"></script>`
   // 'handles invalid json': `<div data-react-component="FakeElement" data-react-props="{">test</div>`
 };

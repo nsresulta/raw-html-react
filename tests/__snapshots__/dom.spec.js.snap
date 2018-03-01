@@ -8,6 +8,8 @@ exports[`client side rendering Handles comments inside tags 1`] = `
 </ul>
 `;
 
+exports[`client side rendering handles script tags 1`] = `hello `;
+
 exports[`client side rendering leaves non-react componetns in place 1`] = `
 <div>
   <span
