@@ -32,6 +32,11 @@ export default class ReactHtml extends React.Component<{
 
     // render the html passed in props to the target element
     if (document.createRange) {
+      // empty renderTarget before appending new fragment
+      while (this.renderTarget.firstChild) {
+        this.renderTarget.removeChild(this.renderTarget.firstChild);
+      }
+
       const range = document.createRange();
       range.setStart(this.renderTarget, 0);
       this.renderTarget.appendChild(range.createContextualFragment(html));

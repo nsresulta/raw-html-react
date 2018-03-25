@@ -36,8 +36,7 @@ class Square extends React.Component {
           height: width,
           color: this.state.hover ? hoverColor : color,
           background: this.state.hover ? hoverBackground : background
-        }}
-      >
+        }}>
         {text}
       </div>
     );
@@ -61,24 +60,21 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div style={{ display: 'flex' }}>
-          <div>
-            <ReactHtml
-              html={this.state.html}
-              componentMap={{ Square }}
-              allowUpdates={true}
-              w
-            />
-          </div>
-          <textarea
-            style={{ width: '100%' }}
-            name="html"
-            onChange={this.handleInputChange}
-            value={this.state.html}
+      <div style={{ display: 'flex' }}>
+        <div>
+          <ReactHtml
+            html={this.state.html}
+            componentMap={{ Square }}
+            allowUpdates
           />
         </div>
-      </React.Fragment>
+        <textarea
+          style={{ width: '100%' }}
+          name="html"
+          onChange={this.handleInputChange}
+          value={this.state.html}
+        />
+      </div>
     );
   }
 }
