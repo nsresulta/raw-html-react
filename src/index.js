@@ -1,24 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default class ReactHtml extends React.Component<{
+export default class ReactHtml extends React.PureComponent<{
   html: String,
   componentMap: Object,
   componentAttribute?: String,
   propsAttribute?: String,
   contextWrapper?: React.Node,
-  allowUpdates?: Boolean,
   onServerRender?: Function
 }> {
   static defaultProps = {
     componentAttribute: 'data-react-component',
-    propsAttribute: 'data-react-props',
-    allowUpdates: false
+    propsAttribute: 'data-react-props'
   };
 
   renderDom = () => {
     // exit early for server-side rendered applications
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !this.renderTarget) {
       return;
     }
 
@@ -26,8 +24,7 @@ export default class ReactHtml extends React.Component<{
       html,
       componentMap,
       componentAttribute,
-      propsAttribute,
-      allowUpdates
+      propsAttribute
     } = this.props;
 
     // render the html passed in props to the target element
@@ -46,40 +43,25 @@ export default class ReactHtml extends React.Component<{
 
     // iterate over all elements that match our componentAttribute
     // ie `<div data-react-component>`
-    Array.from(
+    return Array.from(
       this.renderTarget.querySelectorAll(`[${componentAttribute}]`)
-    ).forEach(node => {
+    ).map(node => {
       const component = componentMap[node.getAttribute(componentAttribute)];
       const props = this.parseStringProps(node.getAttribute(propsAttribute));
       const element = React.createElement(component, props);
 
-      // render the newly created element into the subtree using an
-      // unstable ReactDOM api in order to maintain the tree context
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, element, node, () => {
-        // after the React element is rendered, replace the placeholder element
-        // with it's child to clean up the DOM
-        if (node.replaceWith) {
-          node.replaceWith(...node.childNodes);
-        }
-      });
+      // render the newly created element into the subtree
+      return ReactDOM.createPortal(element, node);
     });
-
-    // if updates are dissallowed we can clean up the dom further by
-    // replacing the target element with it's children
-    if (!allowUpdates && this.renderTarget.replaceWith) {
-      // remove the outer container
-      this.renderTarget.replaceWith(...this.renderTarget.childNodes);
-    }
   };
 
   componentDidMount() {
-    this.renderDom();
+    this.forceUpdate();
   }
 
-  componentDidUpdate() {
-    // Only rerender if updates are explicitly allowed
-    if (this.props.allowUpdates) {
-      this.renderDom();
+  componentWillUnmount() {
+    while (this.renderTarget.firstChild) {
+      this.renderTarget.removeChild(this.renderTarget.firstChild);
     }
   }
 
@@ -158,14 +140,17 @@ export default class ReactHtml extends React.Component<{
 
   render() {
     return (
-      <div
-        ref={element => {
-          this.renderTarget = element;
-        }}
-        dangerouslySetInnerHTML={{
-          __html: this.renderToStaticMarkup()
-        }}
-      />
+      <React.Fragment>
+        <div
+          ref={element => {
+            this.renderTarget = element;
+          }}
+          dangerouslySetInnerHTML={{
+            __html: this.renderToStaticMarkup()
+          }}
+        />
+        {this.renderDom()}
+      </React.Fragment>
     );
   }
 }
