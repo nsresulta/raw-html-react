@@ -16,7 +16,8 @@
     "start": "nwb serve-react-demo",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2"
