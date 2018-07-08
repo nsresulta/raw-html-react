@@ -19,22 +19,23 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "cheerio": "^1.0.0-rc.2"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.x",
+    "react-dom": "16.x"
   },
   "devDependencies": {
-    "babel-jest": "^22.4.3",
+    "babel-jest": "^22.4.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
-    "jest": "^22.4.3",
+    "jest": "^22.4.4",
     "nwb": "0.21.5",
-    "react-test-renderer": "^16.3.0"
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-test-renderer": "^16.4.1"
   },
   "author": "",
   "homepage": "https://github.com/getchalk/raw-html-react",
