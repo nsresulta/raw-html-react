@@ -113,7 +113,11 @@ class Demo extends React.Component {
             <div key={fixture}>
               <h3>{fixture}</h3>
               <pre>{html}</pre>
-              <ReactHtml html={html} componentMap={{ FakeElement }} />
+              <ReactHtml
+                html={html}
+                componentMap={{ FakeElement }}
+                afterFirstRender={() => console.log('rendered html')}
+              />
             </div>
           );
         })}

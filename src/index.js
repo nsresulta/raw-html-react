@@ -7,14 +7,20 @@ export default class ReactHtml extends React.PureComponent<{
   componentAttribute?: String,
   propsAttribute?: String,
   contextWrapper?: React.Node,
-  onServerRender?: Function
+  onServerRender?: Function,
+  afterFirstRender?: Function
 }> {
   static defaultProps = {
     componentAttribute: 'data-react-component',
     propsAttribute: 'data-react-props'
   };
 
-  renderDom = () => {
+  state = {
+    rendered: null,
+    isFirstRender: false
+  };
+
+  componentDidMount() {
     // exit early for server-side rendered applications
     if (typeof window === 'undefined' || !this.renderTarget) {
       return;
@@ -43,7 +49,7 @@ export default class ReactHtml extends React.PureComponent<{
 
     // iterate over all elements that match our componentAttribute
     // ie `<div data-react-component>`
-    return Array.from(
+    const rendered = Array.from(
       this.renderTarget.querySelectorAll(`[${componentAttribute}]`)
     ).map(node => {
       const component = componentMap[node.getAttribute(componentAttribute)];
@@ -53,10 +59,18 @@ export default class ReactHtml extends React.PureComponent<{
       // render the newly created element into the subtree
       return ReactDOM.createPortal(element, node);
     });
-  };
 
-  componentDidMount() {
-    this.forceUpdate();
+    this.setState({
+      rendered,
+      isFirstRender: true
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.state.isFirstRender && this.props.afterFirstRender) {
+      this.props.afterFirstRender();
+      this.setState({ isFirstRender: false });
+    }
   }
 
   componentWillUnmount() {
@@ -145,11 +159,9 @@ export default class ReactHtml extends React.PureComponent<{
           ref={element => {
             this.renderTarget = element;
           }}
-          dangerouslySetInnerHTML={{
-            __html: this.renderToStaticMarkup()
-          }}
+          dangerouslySetInnerHTML={{ __html: this.renderToStaticMarkup() }}
         />
-        {this.renderDom()}
+        {this.state.rendered}
       </React.Fragment>
     );
   }
