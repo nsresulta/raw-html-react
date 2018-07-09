@@ -70,7 +70,13 @@ class Editor extends React.Component {
     return (
       <div style={{ display: 'flex' }}>
         <div>
-          <ReactHtml html={this.state.html} componentMap={{ Square }} />
+          <ReactHtml
+            html={this.state.html}
+            componentMap={{ Square }}
+            afterFirstRender={() => {
+              console.log('rendered html');
+            }}
+          />
         </div>
         <textarea
           style={{ width: '100%' }}
@@ -113,11 +119,7 @@ class Demo extends React.Component {
             <div key={fixture}>
               <h3>{fixture}</h3>
               <pre>{html}</pre>
-              <ReactHtml
-                html={html}
-                componentMap={{ FakeElement }}
-                afterFirstRender={() => console.log('rendered html')}
-              />
+              <ReactHtml html={html} componentMap={{ FakeElement }} />
             </div>
           );
         })}

@@ -20,7 +20,7 @@ export default class ReactHtml extends React.PureComponent<{
     isFirstRender: false
   };
 
-  componentDidMount() {
+  renderDom = () => {
     // exit early for server-side rendered applications
     if (typeof window === 'undefined' || !this.renderTarget) {
       return;
@@ -64,9 +64,17 @@ export default class ReactHtml extends React.PureComponent<{
       rendered,
       isFirstRender: true
     });
+  };
+
+  componentDidMount() {
+    this.renderDom();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.html !== prevProps.html) {
+      this.renderDom();
+    }
+
     if (this.state.isFirstRender && this.props.afterFirstRender) {
       this.props.afterFirstRender();
       this.setState({ isFirstRender: false });
