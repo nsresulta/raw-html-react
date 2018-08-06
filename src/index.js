@@ -161,13 +161,21 @@ export default class ReactHtml extends React.PureComponent<{
   };
 
   render() {
+    const staticMarkup = this.renderToStaticMarkup();
+
+    const divProps = {};
+
+    if (staticMarkup) {
+      divProps.dangerouslySetInnerHTML = { __html: staticMarkup };
+    }
+
     return (
       <React.Fragment>
         <div
           ref={element => {
             this.renderTarget = element;
           }}
-          dangerouslySetInnerHTML={{ __html: this.renderToStaticMarkup() }}
+          {...divProps}
         />
         {this.state.rendered}
       </React.Fragment>
